@@ -1,6 +1,6 @@
 # 🛒 Shop Mart - React E-Commerce UI
 
-A modern e-commerce frontend built with **React**, featuring dynamic routing, slug-based URLs, Context API state management, and a clean dark UI design.
+A modern e-commerce frontend built with **React**, featuring dynamic routing, slug-based URLs, Context API state management, and a clean dark UI design with shadcn.
 
 ---
 
@@ -11,8 +11,10 @@ A modern e-commerce frontend built with **React**, featuring dynamic routing, sl
 - 🔗 SEO-friendly URLs using slugs  
 - ⚡ Global state management using Context API  
 - 🎨 Modern dark-themed UI  
+- 🚦 Shadcn Library
 - 🔄 Smooth navigation between pages  
-- 🧩 Reusable components architecture  
+- 🧩 Reusable components architecture 
+
 
 ---
 
@@ -22,7 +24,8 @@ A modern e-commerce frontend built with **React**, featuring dynamic routing, sl
 - React Router DOM  
 - Context API  
 - JavaScript (ES6+)  
-- Inline CSS Styling  
+- Inline CSS Styling 
+- shadcn 
 - slug
 - useRef
 - useState
