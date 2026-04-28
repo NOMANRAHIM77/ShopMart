@@ -1,94 +1,72 @@
-import React, { useContext } from 'react'
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from '../context/AppProvider'
+import { AppContext } from "../context/AppProvider";
 
 const Product = () => {
-
   const { products, loading } = useContext(AppContext);
   const navigate = useNavigate();
 
-  // slug function
   const createSlug = (title) => {
     return title.toLowerCase().replace(/ /g, "-");
   };
 
-  if (loading) return <p>Loading products ............</p>;
+  if (loading) return <p className="text-white p-4">Loading products...</p>;
 
   return (
-    <div style={{ backgroundColor: "#000", color: "#fff", padding: "20px", minHeight: "100vh" }}>
+    <div className="bg-black text-white min-h-screen px-4 py-6">
       
-      <h1 style={{ textAlign: "center" }}>Our Products</h1>
+      {/* Heading */}
+      <h1 className="text-3xl md:text-5xl font-bold text-center mb-8">
+        Our Products
+      </h1>
 
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-        gap: "20px",
-        padding: "10px"
-      }}>
+      {/* Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 
         {products.map((product) => {
-
           const slug = createSlug(product.title);
 
           return (
-            <div 
+            <div
               key={product.id}
-              style={{
-                backgroundColor: "#1a1a1a",
-                border: "1px solid #333",
-                borderRadius: "12px",
-                padding: "15px",
-                display: "flex",
-                flexDirection: "column"
-              }}
+              className="bg-[#1a1a1a] border border-gray-800 rounded-xl p-4 flex flex-col hover:scale-[1.02] transition-transform duration-200"
             >
-
-              {/* IMAGE */}
-              <img 
+              
+              {/* Image */}
+              <img
                 src={product.thumbnail}
                 alt={product.title}
-                style={{ width: "100%", height: "180px", objectFit: "cover" }}
+                className="w-full h-44 sm:h-48 object-cover rounded-lg"
               />
 
-              {/* TITLE */}
-              <h3>{product.title}</h3>
+              {/* Title */}
+              <h3 className="mt-3 text-base sm:text-lg font-semibold">
+                {product.title}
+              </h3>
 
-              {/* CATEGORY + RATING */}
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span>{product.category}</span>
-                <span>⭐ {product.rating}</span>
+              {/* Category + Rating */}
+              <div className="flex justify-between text-xs sm:text-sm text-gray-400 mt-2">
+                <span className="uppercase">{product.category}</span>
+                <span className="text-yellow-400">⭐ {product.rating}</span>
               </div>
 
-              {/* PRICE + BUTTONS */}
-              <div style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: "10px"
-              }}>
-                <span>${product.price}</span>
+              {/* Price + Button */}
+              <div className="flex justify-between items-center mt-4">
+                <span className="text-lg font-bold">${product.price}</span>
 
                 <button
                   onClick={() => navigate(`/product/${slug}`)}
-                  style={{
-                    padding: "8px 12px",
-                    backgroundColor: "#FFD700",
-                    border: "none",
-                    borderRadius: "6px",
-                    cursor: "pointer"
-                  }}
+                  className="bg-yellow-400 text-black px-3 py-1.5 rounded-md text-sm font-semibold hover:bg-yellow-300 transition"
                 >
                   View
                 </button>
-
               </div>
-
             </div>
           );
         })}
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;
