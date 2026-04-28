@@ -1,63 +1,69 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  // Common style for Nav Links
-  const linkStyle = {
-    color: "#fff",
-    textDecoration: "none",
-    fontSize: "1rem",
-    fontWeight: "500",
-    padding: "8px 16px",
-    borderRadius: "20px",
-    transition: "all 0.3s ease",
-    background: "rgba(0, 0, 0, 0.05)", // Very subtle dark tint for readability
-  };
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav style={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      padding: "15px 50px",
-      backgroundColor: "#ffffff", // White background as requested
-      boxShadow: "0 2px 15px rgba(0,0,0,0.05)",
-      position: "sticky",
-      top: 0,
-      zIndex: 1000,
-      fontFamily: "'Inter', sans-serif"
-    }}>
-      {/* Logo Area */}
-      <div style={{ fontSize: "1.5rem", fontWeight: "bold", color: "#000" }}>
-        SHOP<span style={{ color: "#FFD700" }}>.</span>
+    <nav className="bg-white shadow-md sticky top-0 z-50">
+      
+      {/* Container */}
+      <div className="flex justify-between items-center px-4 md:px-12 py-3">
+
+        {/* Logo */}
+        <div className="text-xl md:text-2xl font-bold text-black">
+          SHOP<span className="text-yellow-400">.</span>
+        </div>
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full">
+          <Link className="px-3 py-1 rounded-full hover:bg-white hover:text-black transition" to="/">
+            Home
+          </Link>
+          <Link className="px-3 py-1 rounded-full hover:bg-white hover:text-black transition" to="/product">
+            Products
+          </Link>
+        </div>
+
+        {/* Cart Button */}
+        <button className="hidden md:block bg-black text-white px-4 py-2 rounded-lg">
+          Cart (0)
+        </button>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden text-2xl text-black"
+        >
+          ☰
+        </button>
       </div>
 
-      {/* Navigation Links with "Aesthetic" dark pill containers for white text */}
-      <div style={{ 
-        display: "flex", 
-        gap: "10px",
-        backgroundColor: "#1a1a1a", // Dark pill to make white text pop on white background
-        padding: "5px 15px",
-        borderRadius: "50px",
-      }}>
-        <Link to="/" style={linkStyle}>Home</Link>
-        <Link to="/product" style={linkStyle}>Products</Link>
-        <Link to="/productDetails" style={linkStyle}>Product Details</Link>
-      </div>
+      {/* Mobile Menu */}
+      {open && (
+        <div className="md:hidden flex flex-col gap-3 px-4 pb-4 bg-white border-t">
 
-      {/* Action Button */}
-      <button style={{
-        padding: "10px 20px",
-        backgroundColor: "#000",
-        color: "#fff",
-        border: "none",
-        borderRadius: "8px",
-        cursor: "pointer",
-        fontWeight: "bold",
-        transition: "transform 0.2s"
-      }}>
-        Cart (0)
-      </button>
+          <Link
+            onClick={() => setOpen(false)}
+            className="py-2"
+            to="/"
+          >
+            Home
+          </Link>
+
+          <Link
+            onClick={() => setOpen(false)}
+            className="py-2"
+            to="/product"
+          >
+            Products
+          </Link>
+
+          <button className="bg-black text-white py-2 rounded-lg">
+            Cart (0)
+          </button>
+        </div>
+      )}
     </nav>
   );
 };
